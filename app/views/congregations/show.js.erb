@@ -1,0 +1,6 @@
+$('#congregationid').val("<%= @congregation.id %>")
+
+$('.cong.active').removeClass('active')
+$('#cong_<%= @congregation.id %>').addClass('active')
+
+check_for_form_completion()

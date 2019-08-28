@@ -1,0 +1,6 @@
+section#outlines
+	h5 Outlines
+	ul.scroller
+	  - @outlines.each do |outline|
+	    li
+	      = link_to outline.title, outline, remote: true, id: "outline_#{outline.id}", class: 'outline'

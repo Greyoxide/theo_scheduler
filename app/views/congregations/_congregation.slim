@@ -1,0 +1,3 @@
+li
+	= link_to congregation.full_name, congregation
+	span = pluralize(congregation.speakers.to_a.count, "Speaker")

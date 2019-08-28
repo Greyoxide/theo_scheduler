@@ -1,0 +1,8 @@
+header
+  h1 Users
+  = link_to [:new, :user] do
+    button + Add User
+
+section
+  ul.list
+    = render @users

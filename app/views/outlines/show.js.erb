@@ -1,0 +1,5 @@
+$('#outlineid').val("<%= @outline.id %>")
+$('.outline.active').removeClass('active')
+$('#outline_<%= @outline.id %>').addClass('active')
+
+check_for_form_completion()

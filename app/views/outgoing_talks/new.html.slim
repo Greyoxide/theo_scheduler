@@ -1,0 +1,38 @@
+header
+	= back_link
+	h1 New Outgoing Talk
+
+= errors(@talk)
+section
+  = form_for @talk, url: outgoing_talks_path, :html => {:method => :post} do |t|
+
+    = t.label :date
+    = t.date_field :date, class: 'required datepicker', id: 'talk_date'
+
+
+    = t.hidden_field :speaker_id, id: 'speakerid', class: 'required'
+    = t.hidden_field :outline_id, id: 'outlineid', class: 'required'
+    = t.hidden_field :congregation_id, id: 'congregationid', class: 'required'
+
+    
+    .float.bottom
+    	= t.submit disabled: true, id: 'create_talk'
+
+    h3 Speaker
+    .row
+
+      .third
+        section#congregations
+          h5 Destination
+          ul.scroller
+            - @congregations.each do |cong|
+              li = link_to cong.full_name, [cong], remote: true, class: 'cong', id: "cong_#{cong.id}"
+      .third
+        section#speakers
+          h5 Outgoing Speaker
+          ul.scroller
+            - @speakers.each do |speaker|
+              li = link_to speaker.full_name, [speaker, :outlines], remote: true, id: "speaker_#{speaker.id}", class: 'speaker'
+            
+      .third
+        section#outlines

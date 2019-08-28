@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: talk_scheduler_development
+
+
+production:
+  <<: *default
+  database: talk_scheduler_production
+  username: talk_scheduler
+  password: <%= ENV['talk_scheduler_DATABASE_PASSWORD'] %>

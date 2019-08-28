@@ -1,0 +1,22 @@
+section
+  = form_for @congregation do |c|
+    = c.label :name
+    = c.text_field :name
+    .row
+      .half
+        = c.label :coordinator, 'Talk Corrdinator'
+        = c.text_field :coordinator
+      .half
+        = c.label :coordinator_phone
+        = c.text_field :coordinator_phone
+
+
+    - if @home.blank? or @home = @congregation
+      br
+      italic Check 'Home', if this is your home congregation.
+      br
+      = c.check_box :home
+      = c.label :home
+
+    br
+      = c.submit

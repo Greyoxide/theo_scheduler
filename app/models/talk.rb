@@ -1,0 +1,61 @@
+class Talk < ApplicationRecord
+  belongs_to :speaker
+  belongs_to :outline
+  belongs_to :group, optional: true
+  belongs_to :congregation, optional: true
+
+  validate :incoming_talks_cannot_be_scheduled_on_same_date
+  validate :one_speaker_cannot_give_two_talks
+
+  def self.incoming
+    where(congregation_id: Congregation.home.id)
+  end
+
+  def self.outgoing
+    where("congregation_id != ?", Congregation.home.id)
+  end
+
+  def incoming?
+    self.congregation_id.blank?
+  end
+
+  def outgoing?
+    self.congregation_id != Congregation.home.id
+  end
+
+  def self.find_within(start, ending)
+    where(date: Date.parse(start.to_s)..Date.parse(ending.to_s))
+  end
+
+  def kind
+    if self.incoming?
+      'Incoming'
+    else
+      'Outoing'
+    end
+  end
+
+  def self.next_date
+    talks = self.order(:date)
+
+    unless talks.blank?
+    talks.last.date + 7.days
+    else
+      Date.current
+    end
+  end
+
+  def incoming_talks_cannot_be_scheduled_on_same_date
+    if self.incoming? and Talk.incoming.where(date: date).blank?
+      errors.add(:date, 'You cannot schedule two incoming talks on the same day.')
+    end
+  end
+
+  def one_speaker_cannot_give_two_talks
+    overlap = Talk.where(date: date).where(speaker_id: speaker_id)
+    unless overlap.blank?
+      errors.add(:date, "#{self.speaker.full_name} is already schedule for another talk on this day")
+    end
+  end
+
+end

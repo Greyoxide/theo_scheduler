@@ -1,0 +1,3 @@
+li
+  = link_to speaker.full_name, speaker
+  span = pluralize(speaker.outlines.to_a.count, 'Outline')

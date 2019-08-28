@@ -1,0 +1,145 @@
+//CSS Grid used to calculate automatically how many columns should fit into area
+.grid
+  display: grid
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))
+  grid-gap: .5rem
+  align-items: flex-start
+
+// Define row columns
+.row
+  margin: .5rem 0
+  display: grid
+  grid-gap: 1rem
+  grid-template-columns: repeat(12, 1fr)
+
+  &>div
+    padding: .5rem
+
+  &>.full
+      grid-column: span 12
+
+  &>.third
+      grid-column: span 4
+      @include phone
+        grid-column: span 12
+      @include tablet
+        grid-column: span 3
+
+  &>.half
+      grid-column: span 6
+      @include phone
+        grid-column: span 12
+      @include tablet
+        grid-column: span 6
+
+  &>.three-qtr
+      grid-column: span 9
+      @include phone
+        grid-column: span 12
+      @include tablet
+        grid-column: span 6
+
+  &>.qtr
+      grid-column: span 3
+      @include phone
+        grid-column: span 12
+      @include tablet
+        grid-column: span 6
+
+
+// Removing for now
+
+// @mixin grid-children($prefix)
+//   &>.#{$prefix}-qtr
+//     flex: 1 0 25%
+
+//   &>.#{$prefix}-half
+//     flex: 1 0 50%
+
+//   &>.#{$prefix}-three-qtr
+//     flex: 1 0 75%
+
+//     // Thirds
+
+//   &>.#{$prefix}-third
+//     flex: 1 0 33%
+
+//   &>.#{$prefix}-two-thirds
+//     flex: 1 0 66%
+
+//   // Fifths
+
+//   &>.#{$prefix}-fifth
+//     flex: 1 0 20%
+
+//   &>.#{$prefix}-two-fifths
+//     flex: 1 0 40%
+
+//   &>.#{$prefix}-four-fifths
+//     flex: 1 0 80%
+
+//   // Full width
+
+//   &>.#{$prefix}-full
+//     flex: 1 0 100%
+// .flex-grid
+//   display: flex
+//   flex-wrap: wrap
+//   align-items: stretch
+
+//   .fifth
+//     flex: 1 0 20%
+//     @include tablet
+//       flex: 1 0 33%
+//     @include phone
+//       flex: 1 0 50%
+//   .qtr
+//     flex: 1 0 25%
+//     @include tablet
+//       flex: 1 0 50%
+//     @include phone
+//       flex: 1 0 100%
+//   .third
+//     flex: 1 0 33.33%
+//     @include tablet
+//       flex: 1 0 50%
+//     @include phone
+//       flex: 1 0 100%
+//   .half
+//     flex: 1 0 50%
+//     @include tablet
+//       flex: 1 0 100%
+//     @include phone
+//       flex: 1 0 100%
+//   .two-thirds
+//     flex: 1 0 66%
+//     @include tablet
+//       flex: 1 0 100%
+//     @include phone
+//       flex: 1 0 100%
+//   .three-qtr
+//     flex: 1 0 75%
+//     @include tablet
+//       flex: 1 0 100%
+//     @include phone
+//       flex: 1 0 100%
+//   .full
+//     flex: 1 0 100%
+
+//   @include phone
+//     @include grid-children(phone)
+//   @include tablet
+//     @include grid-children(tablet)
+//   @include laptop
+//     @include grid-children(laptop)
+//   @include hd
+//     @include grid-children(hd)
+
+//   .flex
+//     display: flex
+//     flex-direction: column
+
+//   &>div
+//     padding: .5rem
+//     @include phone
+//       flex: 1 0 100%

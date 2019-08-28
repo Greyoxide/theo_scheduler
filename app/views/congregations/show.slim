@@ -1,0 +1,14 @@
+header
+  = back_link
+  h1 = @congregation.full_name
+  = link_to "Edit", [:edit, @congregation]
+
+section
+  header
+    h3 Speakers
+    br
+    = link_to [:new, @congregation, :speaker] do
+      button + Add Speaker
+
+  ul.list
+    = render @speakers

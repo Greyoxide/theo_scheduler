@@ -1,0 +1,8 @@
+section
+  = form_for @user do |user|
+    = user.label :email
+    = user.text_field :email
+
+    br
+
+    = user.submit

@@ -1,0 +1,8 @@
+header
+  h1 Congregations
+  = link_to [:new, :congregation] do
+    button + New Congregation
+
+section
+  ul.list
+    = render @congregations

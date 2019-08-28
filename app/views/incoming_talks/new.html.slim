@@ -1,0 +1,35 @@
+header
+  = back_link
+  h1 Schedule New Incoming Talk
+
+= errors(@talk)
+section
+  = form_for @talk, url: incoming_talks_path, :html => {:method => :post} do |t|
+    .row
+      .half
+        = t.label :date
+        = t.date_field :date, value: @next_date, class: 'required datepicker', id: 'talk_date'
+
+      .half
+        = t.label :group_id, 'Hospitality'
+        = t.select :group_id, @groups.collect { |c| [c.full_name, c.id] }, selected: @selected_group.id
+
+    = t.hidden_field :speaker_id, id: 'speakerid', class: 'required'
+    = t.hidden_field :outline_id, id: 'outlineid', class: 'required'
+
+    h3 Speaker
+    .row
+      .third
+        section#congregations
+          h5 Congregation
+          ul.scroller
+            - @congregations.each do |cong|
+              li = link_to cong.full_name, [cong, :speakers], remote: true, class: 'cong', id: "cong_#{cong.id}"
+      .third
+        section#speakers
+      .third
+        section#outlines
+
+    br
+    .float.bottom
+      = t.submit disabled: true, id: 'create_talk'

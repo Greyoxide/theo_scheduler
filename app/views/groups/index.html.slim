@@ -1,0 +1,9 @@
+header
+  = back_link
+  h1 Groups
+  = link_to [:new, :group] do
+    button + New Group
+
+section
+  ul.list
+    = render @groups

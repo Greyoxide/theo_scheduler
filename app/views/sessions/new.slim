@@ -1,0 +1,14 @@
+
+
+section
+  h1.center Login
+
+  = form_tag '/login'
+    = label_tag :email
+    = text_field_tag :email, nil, placeholder: 'email'
+
+    = label_tag :password
+    = password_field_tag :password, nil,  placeholder: '***********'
+
+    .buttons
+      = submit_tag 'Login'

@@ -1,0 +1,9 @@
+$('section#outlines ul').remove()
+$('#speakerid').val('')
+// $('#congregationid').val('<%= @congregation.id %>')
+
+$('section#speakers').replaceWith("<%= j render 'speaker_list' %>")
+$('.cong.active, .outline.active').removeClass('active')
+$('#cong_<%= @congregation.id %>').addClass('active')
+
+check_for_form_completion()

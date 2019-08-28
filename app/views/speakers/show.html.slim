@@ -1,0 +1,12 @@
+header
+  = back_link
+  h1 = @speaker.full_name
+  = link_to 'Edit', [:edit, @speaker]
+  ul.inline.links
+    li = mail_to @speaker.email
+    li = link_to @speaker.phone, "tel::#{@speaker.phone}"
+
+section
+  h3 Outlines
+  ul.list
+    = render @outlines

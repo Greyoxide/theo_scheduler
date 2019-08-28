@@ -1,0 +1,26 @@
+section
+  = form_for [@congregation, @speaker] do |s|
+
+    .row
+      .half
+        = s.label :first_name
+        = s.text_field :first_name
+        br
+        = s.label :last_name
+        = s.text_field :last_name
+        br
+        = s.label :email
+        = s.text_field :email
+        br
+        = s.label :phone
+        = s.text_field :phone
+      .half
+        = s.label :outline_ids
+        .scroller
+          = s.collection_check_boxes :outline_ids, Outline.all, :id, :full_title do |b|
+            .checkbox
+              = b.check_box
+              = b.label
+
+    br
+      = s.submit

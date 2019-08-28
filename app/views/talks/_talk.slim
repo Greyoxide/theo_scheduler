@@ -1,0 +1,9 @@
+li
+  p = talk.date.strftime("%b-%e")
+  p
+    b = talk.outline.title
+  p = "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
+  p = "Hospitality: #{talk.group.name}"
+
+  ul.inline.links
+    = link_to "Delete", talk, method: :delete
