@@ -1,0 +1,19 @@
+- if @user.errors.any?
+  .wrapper
+    .errors
+      ul
+        - @user.errors.full_messages.each do |error|
+          li
+            p = error
+.wrapper
+  .form
+    h1 Set Password
+    = form_for @user, :url => password_reset_path(params[:id]) do |f|
+      = f.password_field :password
+      = f.label :password
+
+      = f.password_field :password_confirmation
+      = f.label :password_confirmation
+
+      .button-box
+        = f.submit "Submit", :class => "button primary"

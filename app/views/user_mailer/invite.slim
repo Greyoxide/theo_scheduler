@@ -1,0 +1,9 @@
+
+  .body
+    p = "Hi #{@user.email}"
+
+    p To setup your account, click on the link below, and enter a password.
+
+    = link_to "Click here to set a password", edit_password_reset_url(@user.password_reset_token)
+
+    p For security purposes, this link will only work for one day.
