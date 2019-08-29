@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   end
   resources :outlines
 
-  resources :talks
-  resources :incoming_talks
-  resources :outgoing_talks
+  resources :talks, only: [:index]
+  resources :incoming_talks, only: [:new, :create]
+  resources :outgoing_talks, only: [:new, :create]
 
   resources :groups
 

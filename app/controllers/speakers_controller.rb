@@ -1,5 +1,7 @@
 class SpeakersController < ApplicationController
 
+  before_action :authorize
+
   def index
     respond_to do |format|
       format.js do

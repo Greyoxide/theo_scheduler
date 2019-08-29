@@ -1,4 +1,7 @@
 class TalksController < ApplicationController
+
+  before_action :authorize
+
   def index
 
     if params.has_key?(:starting) and params.has_key?(:ending)
@@ -21,18 +24,6 @@ class TalksController < ApplicationController
                               disposition: "inline"
       end
     end
-  end
-
-  def show
-    @talk = Talk.find(params[:id])
-  end
-
-  def new
-    @talk = Talk.new
-    @congregations = Congregation.all
-  end
-
-  def edit
   end
 
   def destroy
