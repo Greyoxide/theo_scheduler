@@ -7,7 +7,7 @@ class CongregationsController < ApplicationController
   end
 
   def new
-    @home = Congregation.where(home: 1)
+    @home = Congregation.where(home: true)
     @congregation = Congregation.new
   end
 
