@@ -46,6 +46,17 @@ class SpeakersController < ApplicationController
     end
   end
 
+  def outline_list
+    @speaker = Speaker.find(params[:speaker_id])
+    @ountlines = @speaker.outlines
+  end
+
+  def update_outline_list
+    @speaker = Speaker.find(params[:speaker_id])
+    @outlines = params[:outlines]
+    @speaker.update_list(params[:outlines].split(',').map{ |o| o.to_id })
+  end
+
   private
 
   def speaker_params
