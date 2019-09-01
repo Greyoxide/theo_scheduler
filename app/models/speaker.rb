@@ -3,6 +3,8 @@ class Speaker < ApplicationRecord
   has_many :speaker_outlines
   has_many :outlines, through: :speaker_outlines
 
+  validates_presence_of :first_name, :last_name
+
   after_save :update_outlines
 
   attribute :outline_list, :string
@@ -17,9 +19,14 @@ class Speaker < ApplicationRecord
   		self.speaker_outlines.delete_all
 	  	if list.first.class == String
 	  		if list.include?(",")
+          # Assuming the list is a comma seperated list
 	  			list = list.split(',').map{ |o| o.to_i }
 	  		elsif list.include(" ") and list.exclude? ","
+          # In case they seperated outline numbers with a space and no comma
 	  			list = list.split(" ").map{ |o| o.to_i }
+        else
+          # this assumes theres just a single talk outline
+          list.split
 	  		end
 	  	end
 	  	self.outlines << Outline.where(number: list)
