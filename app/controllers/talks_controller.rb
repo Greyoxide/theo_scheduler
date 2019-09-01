@@ -1,6 +1,6 @@
 class TalksController < ApplicationController
 
-  before_action :authorize
+  before_action :authorize, :dissolve, only: [:index]
 
   def index
 

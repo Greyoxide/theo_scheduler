@@ -21,7 +21,7 @@ class Speaker < ApplicationRecord
 	  		if list.include?(",")
           # Assuming the list is a comma seperated list
 	  			list = list.split(',').map{ |o| o.to_i }
-	  		elsif list.include(" ") and list.exclude? ","
+	  		elsif list.include? " " and list.exclude? ","
           # In case they seperated outline numbers with a space and no comma
 	  			list = list.split(" ").map{ |o| o.to_i }
         else

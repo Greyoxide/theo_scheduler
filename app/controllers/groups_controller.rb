@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
 
-  before_action :authorize
+  before_action :authorize, :dissolve, only: [:index]
 
   def index
     @groups = Group.all

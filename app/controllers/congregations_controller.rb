@@ -1,18 +1,19 @@
 class CongregationsController < ApplicationController
 
-  before_action :authorize
+  before_action :authorize, :dissolve, only: [:index]
 
   def index
     @congregations = Congregation.includes([:speakers]).filter_by(params.slice(:search_for, :status))
   end
 
   def new
-    @home = Congregation.where(home: true)
     @congregation = Congregation.new
+    @allow_home = true if @congregation.home? or Congregation.home.blank?
   end
 
   def create
     @congregation = Congregation.new(cong_params)
+    @allow_home = true if @congregation.home? or Congregation.home.blank?
     if @congregation.save
       redirect_to @congregation
     else
@@ -30,12 +31,13 @@ class CongregationsController < ApplicationController
   end
 
   def edit
-    @home = Congregation.where(home: 1)
     @congregation = Congregation.find(params[:id])
+    @allow_home = true if @congregation.home? or Congregation.home.blank?
   end
 
   def update
     @congregation = Congregation.find(params[:id])
+    @allow_home = true if @congregation.home? or Congregation.home.blank?
     if @congregation.update(cong_params)
       redirect_to @congregation
     else

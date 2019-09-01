@@ -1,17 +1,19 @@
 section
   = form_for @congregation do |c|
-    = c.label :name
-    = c.text_field :name
+    
     .row
-      .half
-        = c.label :coordinator, 'Talk Corrdinator'
+      .third
+        = c.label :name
+        = c.text_field :name
+      .third
+        = c.label :coordinator, 'Talk Coordinator'
         = c.text_field :coordinator
-      .half
+      .third
         = c.label :coordinator_phone
         = c.text_field :coordinator_phone
 
 
-    - if @home.blank? or @home = @congregation
+    - if @allow_home == true
       br
       italic Check 'Home', if this is your home congregation.
       br
