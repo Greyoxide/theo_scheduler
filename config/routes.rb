@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :speakers, except: [:new, :create] do
     resources :outlines
+    resources :transfers, only: [:new, :create]
   end
   resources :outlines
 

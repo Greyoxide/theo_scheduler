@@ -5,6 +5,7 @@ header
   ul.inline.links
     li = mail_to @speaker.email
     li = link_to @speaker.phone, "tel::#{@speaker.phone}"
+    li = link_to "Transfer to another congregation", [:new, @speaker, :transfer]
 
 section
   h3 Outlines

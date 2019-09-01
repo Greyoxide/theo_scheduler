@@ -1,0 +1,14 @@
+header
+	= back_link
+	h1 = "Transfer #{@speaker.full_name} to another congregation"
+	h4 = "Current congregation: #{@speaker.congregation.name}"
+
+section
+	= form_for @speaker, url: [@speaker, :transfers], html: {method: :post} do |s|
+		.row
+			.half.right
+				= s.label :congregation
+			.half
+				= s.select :congregation_id, @congregations.collect{ |c| [c.full_name, c.id] }
+		.float.bottom
+			= s.submit class: 'center'
