@@ -2,18 +2,21 @@ section
   = form_for [@congregation, @speaker] do |s|
 
     .row
-      .half
-        = s.label :first_name
-        = s.text_field :first_name
-      .half
-        = s.label :last_name
-        = s.text_field :last_name
-      .half
-        = s.label :email
-        = s.text_field :email
-      .half
+      / .half
+      /   = s.label :first_name
+      /   = s.text_field :first_name
+      / .half
+      /   = s.label :last_name
+      /   = s.text_field :last_name
+      .third
+        = s.label :full_name
+        = s.text_field :full_name
+      .third
         = s.label :phone
         = s.text_field :phone
+      .third
+        = s.label :email
+        = s.text_field :email
       .full
         = s.label :outlines, "comma-seperated list of outline numbers"
         = s.text_field :outline_list, value: @outlines

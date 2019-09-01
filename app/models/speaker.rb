@@ -13,6 +13,12 @@ class Speaker < ApplicationRecord
     "#{first_name} #{last_name}".titleize
   end
 
+  def full_name=(name)
+    split = name.split(' ', 2)
+    self.first_name = split.first
+    self.last_name = split.last
+  end
+
   def update_outlines
   	if outline_list
   		list = outline_list
