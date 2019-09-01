@@ -8,10 +8,6 @@ Rails.application.routes.draw do
   end
   resources :speakers, except: [:new, :create] do
     resources :outlines
-    collection do
-      get 'outline_list'
-      post 'outline_list'
-    end
   end
   resources :outlines
 

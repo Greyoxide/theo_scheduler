@@ -5,22 +5,25 @@ section
       .half
         = s.label :first_name
         = s.text_field :first_name
-        br
+      .half
         = s.label :last_name
         = s.text_field :last_name
-        br
+      .half
         = s.label :email
         = s.text_field :email
-        br
+      .half
         = s.label :phone
         = s.text_field :phone
-      .half
-        = s.label :outline_ids
-        .scroller
-          = s.collection_check_boxes :outline_ids, Outline.all, :id, :full_title do |b|
-            .checkbox
-              = b.check_box
-              = b.label
+      .full
+        = s.label :outlines, "comma-seperated list of outline numbers"
+        = s.text_field :outline_list, value: @outlines
+
+        / = s.label :outline_ids
+        / .scroller
+        /   = s.collection_check_boxes :outline_ids, Outline.all, :id, :full_title do |b|
+        /     .checkbox
+        /       = b.check_box
+        /       = b.label
 
 
     .float.bottom

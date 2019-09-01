@@ -34,6 +34,7 @@ class SpeakersController < ApplicationController
   def edit
     @speaker = Speaker.find(params[:id])
     @congregation = @speaker.congregation
+    @outlines = @speaker.outlines.map{ |o| o.number }.join(", ")
   end
 
   def update
@@ -46,20 +47,9 @@ class SpeakersController < ApplicationController
     end
   end
 
-  def outline_list
-    @speaker = Speaker.find(params[:speaker_id])
-    @ountlines = @speaker.outlines
-  end
-
-  def update_outline_list
-    @speaker = Speaker.find(params[:speaker_id])
-    @outlines = params[:outlines]
-    @speaker.update_list(params[:outlines].split(',').map{ |o| o.to_id })
-  end
-
   private
 
   def speaker_params
-    params.require(:speaker).permit(:first_name, :last_name, :email, :phone, :outline_ids => [])
+    params.require(:speaker).permit(:first_name, :last_name, :email, :phone, :outline_list)
   end
 end
