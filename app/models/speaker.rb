@@ -14,4 +14,5 @@ class Speaker < ApplicationRecord
   	end
   	self.outlines << Outline.where(number: list)
   end
+  
 end
