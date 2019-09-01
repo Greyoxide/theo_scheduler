@@ -26,7 +26,7 @@ class Speaker < ApplicationRecord
 	  			list = list.split(" ").map{ |o| o.to_i }
         else
           # this assumes theres just a single talk outline
-          list.split
+          list.split.map{|o| o.to_i}
 	  		end
 	  	end
 	  	self.outlines << Outline.where(number: list)
