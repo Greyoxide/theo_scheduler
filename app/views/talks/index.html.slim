@@ -19,33 +19,17 @@ header
           li
             = link_to "New Outgoing Talk", [:new, :outgoing_talk]
           li
+            = link_to "New Assembly", [:new, :assembly]
+          li
             = link_to "Print", talks_path(format: "pdf", starting: params[:starting], ending: params[:ending])
 
 
 section
   ul
-  	- @talks.group_by(&:date).each do |date, talks|
+    - @talks.group_by(&:date).each do |date, talks|
       h4 = date.strftime("%b-%e")
       ul
-				- talks.group_by { |t| t.kind }.sort.each do |kind, talks|
-					h5 = kind.titleize
-					ul
-						- talks.each do |talk|
-							- if talk.incoming?
-								li.talk.incoming
-									p
-										b = talk.outline.title
-									p = "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
-									p = "Hospitality: #{talk.group.name}"
-
-
-								= link_to "Delete", talk, method: :delete
-
-							- elsif talk.outgoing?
-								li.talk.outgoing
-									p
-										i = "#{talk.speaker.full_name} to #{talk.congregation.name.titleize}"
-									p
-										i = talk.outline.title
-										= link_to "Delete", talk, method: :delete
-
+        - talks.group_by { |t| t.kind }.sort.each do |kind, talks|
+          h5 = kind.titleize unless talks.first.assembly
+          ul
+            = render talks

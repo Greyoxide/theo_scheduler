@@ -1,0 +1,13 @@
+header
+  = back_link
+  h1 New Assembly
+
+= errors(@talk)
+section
+  = form_for @talk, url: assemblies_path, html: {method: :post} do |talk|
+
+    = talk.label :date
+    = talk.date_field :date
+
+    .float.bottom
+      = talk.submit

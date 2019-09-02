@@ -1,9 +1,21 @@
-li
-  p = talk.date.strftime("%b-%e")
-  p
-    b = talk.outline.title
-  p = "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
-  p = "Hospitality: #{talk.group.name}"
+- if talk.assembly
+  li.talk.assembly
+    h4 Circuit Assembly 
 
-  ul.inline.links
-    = link_to "Delete", talk, method: :delete
+- elsif talk.incoming?
+  li.talk.incoming
+    p
+      b = talk.outline.title
+    p = "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
+    p = "Hospitality: #{talk.group.name}"
+
+
+  = link_to "Delete", talk, method: :delete
+
+- elsif talk.outgoing?
+  li.talk.outgoing
+    p
+      i = "#{talk.speaker.full_name} to #{talk.congregation.name.titleize}"
+    p
+      i = talk.outline.title
+      = link_to "Delete", talk, method: :delete

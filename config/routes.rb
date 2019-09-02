@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'assemblies/new'
   root to: 'users#index'
 
   resources :users
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   resources :talks, only: [:index, :destroy]
   resources :incoming_talks, only: [:new, :create]
   resources :outgoing_talks, only: [:new, :create]
+  resources :assemblies, only: [:new, :create]
 
   resources :groups
 
@@ -25,4 +27,3 @@ Rails.application.routes.draw do
 
   get 'logout', to: 'sessions#destroy', as: :logout
 end
-
