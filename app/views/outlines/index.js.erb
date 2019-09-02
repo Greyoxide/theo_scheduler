@@ -1,6 +1,22 @@
-$('section#outlines').replaceWith("<%= j render 'outline_list' %>")
+// $('section#outlines').replaceWith("<%= j render 'outline_list' %>")
+// $('#outlineid').val("")
+// $('#speakerid').val("<%= @speaker.id %>")
+// $('.speaker.active').removeClass('active')
+// $('#create_talk').attr('disabled', true)
+// $('#speaker_<%= @speaker.id %>').addClass('active')
+
+
+
+// first we have to clear the results of previous selections
 $('#outlineid').val("")
-$('#speakerid').val("<%= @speaker.id %>")
+
+$('.congregation .speakers .outlines').remove()
 $('.speaker.active').removeClass('active')
-$('#create_talk').attr('disabled', true)
+
+// then we have to render the appropriate speaker list and append it to the correct congregation.
+$('#speaker_<%= @speaker.id %>').after("<%= j render 'outline_list' %>")
+
+$('#speakerid').val("<%= @speaker.id %>")
 $('#speaker_<%= @speaker.id %>').addClass('active')
+
+check_for_form_completion()

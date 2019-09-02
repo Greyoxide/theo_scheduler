@@ -1,5 +1,3 @@
-section#speakers
-	h5 Speakers
-	ul.scroller
-	  - @speakers.each do |speaker|
+ul.speakers
+	- @speakers.each do |speaker|
 	    li = link_to speaker.full_name, [speaker, :outlines], remote: true, id: "speaker_#{speaker.id}", class: 'speaker'

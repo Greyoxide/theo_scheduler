@@ -1,9 +1,13 @@
-$('section#outlines ul').remove()
-$('#speakerid').val('')
-// $('#congregationid').val('<%= @congregation.id %>')
 
-$('section#speakers').replaceWith("<%= j render 'speaker_list' %>")
-$('.cong.active, .outline.active').removeClass('active')
-$('#cong_<%= @congregation.id %>').addClass('active')
+// first we have to clear the results of previous selections
+$('#speakerid').val('')
+$('#outlineid').val('')
+
+$('li.congregation .speakers').remove()
+$('.cong.active').removeClass("active")
+
+// then we have to render the appropriate speaker list and append it to the correct congregation.
+var target = $('#cong_<%= @congregation.id %>')
+target.after("<%= j render 'speaker_list' %>")
 
 check_for_form_completion()

@@ -46,7 +46,7 @@ class Talk < ApplicationRecord
   end
 
   def incoming_talks_cannot_be_scheduled_on_same_date
-    if self.incoming? and Talk.incoming.where(date: date).blank?
+    if self.incoming? and Talk.where(date: date).where(speaker: self.speaker).present?
       errors.add(:date, 'You cannot schedule two incoming talks on the same day.')
     end
   end

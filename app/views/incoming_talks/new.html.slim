@@ -17,18 +17,26 @@ section
     = t.hidden_field :speaker_id, id: 'speakerid', class: 'required'
     = t.hidden_field :outline_id, id: 'outlineid', class: 'required'
 
-    h3 Speaker
-    .row
-      .third
-        section#congregations
-          h5 Congregation
-          ul.scroller
-            - @congregations.each do |cong|
-              li = link_to cong.full_name, [cong, :speakers], remote: true, class: 'cong', id: "cong_#{cong.id}"
-      .third
-        section#speakers
-      .third
-        section#outlines
+    / h3 Speaker
+    / .row
+    /   .third
+    /     section#congregations
+    /       h5 Congregation
+    /       ul.scroller
+    /         - @congregations.each do |cong|
+    /           li = link_to cong.full_name, [cong, :speakers], remote: true, class: 'cong', id: "cong_#{cong.id}"
+    /   .third
+    /     section#speakers
+    /   .third
+    /     section#outlines
+
+    h3 Speakers
+    ul#congregations.blocks
+      - @congregations.each do |congregation|
+        li.congregation
+          = link_to congregation.full_name, [congregation, :speakers], remote: true, class: 'cong', id: "cong_#{congregation.id}"
+
+
 
     br
     .float.bottom
