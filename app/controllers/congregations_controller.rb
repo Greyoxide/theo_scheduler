@@ -3,7 +3,7 @@ class CongregationsController < ApplicationController
   before_action :authorize, :dissolve, only: [:index]
 
   def index
-    @congregations = Congregation.includes([:speakers]).filter_by(params.slice(:search_for, :status))
+    @congregations = Congregation.includes( speakers: [:talks] ).filter_by(params.slice(:search_for, :status))
   end
 
   def new
@@ -23,7 +23,7 @@ class CongregationsController < ApplicationController
 
   def show
     @congregation = Congregation.find(params[:id])
-    @speakers = @congregation.speakers.includes([:outlines])
+    @speakers = @congregation.speakers
     respond_to do |format|
       format.html
       format.js

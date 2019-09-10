@@ -4,6 +4,7 @@ class Congregation < ApplicationRecord
   validates :home, uniqueness: true, allow_blank: true
 
   has_many :speakers, dependent: :destroy
+  has_many :talks
 
   include Filterable
 

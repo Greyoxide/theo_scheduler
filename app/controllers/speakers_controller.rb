@@ -14,6 +14,7 @@ class SpeakersController < ApplicationController
   def show
     @speaker = Speaker.find(params[:id])
     @outlines = @speaker.outlines
+    @talks = @speaker.talks
   end
 
   def new

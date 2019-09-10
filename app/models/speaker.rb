@@ -2,6 +2,7 @@ class Speaker < ApplicationRecord
   belongs_to :congregation
   has_many :speaker_outlines
   has_many :outlines, through: :speaker_outlines
+  has_many :talks
 
   validates_presence_of :first_name, :last_name
 

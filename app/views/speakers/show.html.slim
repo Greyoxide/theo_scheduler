@@ -8,6 +8,24 @@ header
     li = link_to "Transfer to another congregation", [:new, @speaker, :transfer]
 
 section
-  h3 Outlines
-  ul.list
-    = render @outlines
+  section
+    h3 Talks
+    ul.list
+      - @talks.each do |talk|
+        - if talk.incoming?
+          li
+            span = talk.date.strftime("%D")
+            span = talk.speaker.congregation.name
+            span = talk.outline.number
+
+        - else
+          li
+            span = talk.date.strftime("%D")
+            span = "no: #{talk.outline.number}"
+            span = talk.congregation.name
+  section
+    h3 Outlines
+    ul.list
+      = render @outlines
+
+

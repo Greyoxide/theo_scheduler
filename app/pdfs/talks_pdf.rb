@@ -22,7 +22,7 @@ class TalksPdf < PdfBase
         move_down 10
         text "Circuit Assembly", size: 14, style: :bold
       else
-        talk_group.group_by(&:kind).each do |kind, talks|
+        talk_group.sort_by { |t| t.kind }.group_by(&:kind).each do |kind, talks|
 
           unless kind == "Incoming"
             move_down 10

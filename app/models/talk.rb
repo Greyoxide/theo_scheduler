@@ -4,10 +4,35 @@ class Talk < ApplicationRecord
   belongs_to :group, optional: true
   belongs_to :congregation, optional: true
 
+  # Validations
+
   validate :incoming_talks_cannot_be_scheduled_on_same_date, :one_speaker_cannot_give_two_talks, :talks_cannot_be_scheduled_during_assembly
 
+  default_scope { order(:date) }
+
+  def incoming_talks_cannot_be_scheduled_on_same_date
+    if self.incoming? and Talk.where(date: date).where(speaker: self.speaker).present?
+      errors.add(:date, 'You cannot schedule two incoming talks on the same day.')
+    end
+  end
+
+  def one_speaker_cannot_give_two_talks
+    overlap = Talk.where(date: date).where(speaker_id: speaker_id)
+    unless overlap.blank?
+      errors.add(:date, "#{self.speaker.full_name} is already schedule for another talk on this day")
+    end
+  end
+
+  def talks_cannot_be_scheduled_during_assembly
+    if Talk.where(date: date).where(assembly: true).present?
+      errors.add(:date, 'You cannot schedule talks during an assembly.')
+    end
+  end
+
+  # Attributes
+
   def self.incoming
-    where(congregation_id: Congregation.home.id)
+    where(congregation_id: nil).where.not(assembly: true)
   end
 
   def self.outgoing
@@ -47,24 +72,4 @@ class Talk < ApplicationRecord
       Date.current
     end
   end
-
-  def incoming_talks_cannot_be_scheduled_on_same_date
-    if self.incoming? and Talk.where(date: date).where(speaker: self.speaker).present?
-      errors.add(:date, 'You cannot schedule two incoming talks on the same day.')
-    end
-  end
-
-  def one_speaker_cannot_give_two_talks
-    overlap = Talk.where(date: date).where(speaker_id: speaker_id)
-    unless overlap.blank?
-      errors.add(:date, "#{self.speaker.full_name} is already schedule for another talk on this day")
-    end
-  end
-
-  def talks_cannot_be_scheduled_during_assembly
-    if Talk.where(date: date).where(assembly: true).present?
-      errors.add(:date, 'You cannot schedule talks during an assembly.')
-    end
-  end
-
 end

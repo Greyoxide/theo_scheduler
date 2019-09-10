@@ -36,6 +36,7 @@ gem 'jquery-rails'
 
 gem 'prawn'
 gem 'responders'
+gem 'prawn-grouping'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
