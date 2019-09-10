@@ -12,7 +12,7 @@ class TalksPdf < PdfBase
 
   def header
     text "Talk Schedule #{@date_range}", size: 20, style: :bold
-    text "Printed: #{Date.today.strftime('%d'}", size: 14
+    text "Printed: #{Date.today.strftime('%d')}", size: 14
     move_down 30
   end
 
