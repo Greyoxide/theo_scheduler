@@ -15,6 +15,7 @@ class SpeakersController < ApplicationController
     @speaker = Speaker.find(params[:id])
     @outlines = @speaker.outlines
     @talks = @speaker.talks
+    @notes = @speaker.notes
   end
 
   def new

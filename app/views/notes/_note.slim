@@ -1,0 +1,9 @@
+article
+  header
+    span = "created: #{note.created_at.strftime('%D')}"
+    span = "last updated: #{note.updated_at.strftime('%D')}"
+  p
+    = note.body
+  ul.inline.links
+    li = link_to "Edit", [:edit, note]
+    li = link_to "Delete", note, method: :delete

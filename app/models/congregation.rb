@@ -5,6 +5,7 @@ class Congregation < ApplicationRecord
 
   has_many :speakers, dependent: :destroy
   has_many :talks
+  has_many :notes, as: :notable
 
   include Filterable
 

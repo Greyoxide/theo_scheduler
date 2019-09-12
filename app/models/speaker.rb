@@ -3,6 +3,7 @@ class Speaker < ApplicationRecord
   has_many :speaker_outlines
   has_many :outlines, through: :speaker_outlines
   has_many :talks
+  has_many :notes, as: :notable
 
   validates_presence_of :first_name, :last_name
 

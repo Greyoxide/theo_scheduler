@@ -6,6 +6,7 @@ class Outline < ApplicationRecord
 
   has_many :speaker_outlines
   has_many :speakers, through: :outlines
+  has_many :notes, as: :notable
 
   default_scope { order(number: :asc) }
 end

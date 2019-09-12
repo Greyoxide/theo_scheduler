@@ -7,7 +7,7 @@ header
     li = link_to @speaker.phone, "tel::#{@speaker.phone}"
     li = link_to "Transfer to another congregation", [:new, @speaker, :transfer]
 
-section
+
   section
     h3 Talks
     ul.list
@@ -23,9 +23,21 @@ section
             span = talk.date.strftime("%D")
             span = "no: #{talk.outline.number}"
             span = talk.congregation.name
-  section
-    h3 Outlines
-    ul.list
-      = render @outlines
 
+
+section
+  .row
+    .half
+      h3 Outlines
+      ul.list
+        = render @outlines
+
+    .half
+      section
+        header
+          h3 Notes
+          = link_to "+ Add Note", [:new, @speaker, :note]
+        = render @notes
+
+      
 

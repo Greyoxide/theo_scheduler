@@ -24,6 +24,7 @@ class CongregationsController < ApplicationController
   def show
     @congregation = Congregation.find(params[:id])
     @speakers = @congregation.speakers
+    @notes = @congregation.notes
     respond_to do |format|
       format.html
       format.js

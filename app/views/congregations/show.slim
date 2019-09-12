@@ -4,9 +4,21 @@ header
   p = "Coordinator: #{@congregation.coordinator}, phone: #{ @congregation.coordinator_phone }"
   ul.links.inline
     li = link_to "Edit", [:edit, @congregation]
-    li = link_to "+ Add Speaker", [:new, @congregation, :speaker]
 
 section
 
-  ul.list
-    = render @speakers
+  .row
+    .half
+      section
+        header
+          h3 Speakers
+          = link_to "+ Add Speaker", [:new, @congregation, :speaker]
+        ul.list
+          = render @speakers
+
+    .half
+      section#notes
+        header
+          h3 Notes
+          = link_to " + Add Note", [:new, @congregation, :note]
+        = render @notes

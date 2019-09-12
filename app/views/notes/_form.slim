@@ -1,0 +1,8 @@
+= errors(@note)
+section
+  = form_for [@notable, @note] do |note|
+    = note.text_area :body
+
+    .float.bottom
+      = note.submit
+  
