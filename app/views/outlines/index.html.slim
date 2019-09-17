@@ -1,0 +1,17 @@
+masthead
+  = back_link
+  h1 Outlines
+  = link_to "+ New Outline", [:new, :outline]
+
+section
+  = link_to "Show Active Outlines", outlines_path(filter: 'active') if @showing == 'Suspended'
+  = link_to "Show Suspended Outlines", outlines_path(filter: 'suspended') if @showing == 'Active'
+  h3 = "Showing #{@showing} Outlines"
+  ul.list
+    - @outlines.each do |outline|
+      li
+        span = outline.full_title
+        ul.inline.links
+          li = link_to "Edit", [:edit, outline]
+
+      

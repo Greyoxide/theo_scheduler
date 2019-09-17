@@ -1,0 +1,18 @@
+= errors(@outline)
+
+section
+  = form_for @outline do |outline|
+    .row
+      .qtr
+        = outline.label :number
+        = outline.number_field :number
+      .three-qtr
+        = outline.label :title
+        = outline.text_field :title
+    = collection_radio_buttons :outline, :status, Outline.statuses, :first, :first  do |b|
+      div
+        = b.radio_button
+        = b.label
+
+    .float.bottom
+      = outline.submit
