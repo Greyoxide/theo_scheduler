@@ -49,6 +49,13 @@ class SpeakersController < ApplicationController
     end
   end
 
+  def delete
+    @speaker = Speaker.find(params[:id])
+    @congregation = @speaker.congregation
+    @speaker.destroy
+    redirect_to @congregation
+  end
+
   private
 
   def speaker_params
