@@ -1,6 +1,6 @@
 class Speaker < ApplicationRecord
   belongs_to :congregation
-  has_many :speaker_outlines
+  has_many :speaker_outlines, dependent: :destroy
   has_many :outlines, through: :speaker_outlines
   has_many :talks
   has_many :notes, as: :notable
