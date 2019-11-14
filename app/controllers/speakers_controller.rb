@@ -49,7 +49,7 @@ class SpeakersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @speaker = Speaker.find(params[:id])
     @congregation = @speaker.congregation
     @speaker.destroy
