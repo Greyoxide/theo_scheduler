@@ -10,4 +10,6 @@ $('.cong.active').removeClass("active")
 var target = $('#cong_<%= @congregation.id %>')
 target.after("<%= j render 'speaker_list' %>")
 
+target.addClass('active')
+
 check_for_form_completion()

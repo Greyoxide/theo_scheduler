@@ -3,14 +3,26 @@ class OutlinesController < ApplicationController
 	before_action :authorize
 
   def index
-    if params[:filter] == 'suspended'
-      @showing = "Suspended"
-      @outlines = Outline.suspended
-    else
-      @showing = "Active"
-      @outlines = Outline.active
-    end
+		respond_to do |format|
+			format.html do
+		    if params[:filter] == 'suspended'
+		      @showing = "Suspended"
+		      @outlines = Outline.suspended
+		    else
+		      @showing = "Active"
+		      @outlines = Outline.active
+		    end
+			end
+			format.js do
+				@speaker = Speaker.find(params[:speaker_id])
+				@outlines = @speaker.outlines
+			end
+		end
   end
+
+	def show
+		@outline = Outline.find(params[:id])
+	end
 
   def new
     @outline = Outline.new
