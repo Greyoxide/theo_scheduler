@@ -1,0 +1,13 @@
+header
+  = back_link
+  h1 = @outline.title.titleize
+
+section
+  h3 Speakers with this outline.
+  ul
+    - @speakers.group_by{ |s| s.congregation.name }.each do |cong, speakers|
+      h4 = cong
+      ul.list
+        - speakers.each do |s|
+          li
+            = link_to s.full_name, s

@@ -1,6 +1,7 @@
 class SpeakersController < ApplicationController
 
   before_action :authorize
+  before_action :dissolve, only: [:index]
 
   def index
     respond_to do |format|

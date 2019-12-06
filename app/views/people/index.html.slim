@@ -1,0 +1,10 @@
+header
+  = back_link
+  h1 People
+  = link_to [:new, :person] do
+    button + New Person
+
+section
+  ul
+    - @people.each do |person|
+      li = link_to person.full_name, person

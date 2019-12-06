@@ -1,0 +1,19 @@
+header
+  = back_link
+  h1 New Special Event
+
+= errors(@talk)
+
+section
+  = form_for @talk, url: special_events_path, :html => {:method => :post} do |event|
+    .row
+      .half
+        = event.label :date
+        = event.date_field :date, value: @next_date, class: 'required datepicker', id: 'talk_date'
+
+      .half
+        = event.label :kind, 'Special event'
+        = event.select :kind, (Talk.kinds.tap { |hs| hs.delete(:normal) }.keys.map{ |w| [w.humanize, w] })
+
+    .float.bottom
+      = event.submit

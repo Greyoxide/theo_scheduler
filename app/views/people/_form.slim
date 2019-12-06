@@ -1,0 +1,16 @@
+= errors(@person)
+
+section
+  = form_for @person do |p|
+
+    .row
+      .half
+        = p.label :first_name
+        = p.text_field :first_name
+
+      .half
+        = p.label :last_name
+        = p.text_field :last_name
+
+    .float.bottom
+      = p.submit

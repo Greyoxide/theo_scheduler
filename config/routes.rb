@@ -1,17 +1,33 @@
 Rails.application.routes.draw do
 
+  get 'assignments/index'
+  get 'assignments/show'
+  get 'assignments/new'
+  get 'assignments/edit'
+  get 'people/index'
+  get 'people/show'
+  get 'people/new'
+  get 'people/edit'
   root to: 'users#index'
 
   resources :users
+
+  resources :people
+  resources :assignments
+
+  resources :special_events
+
   resources :congregations do
     resources :notes
     resources :speakers
   end
+
   resources :speakers, except: [:new, :create] do
     resources :outlines
     resources :notes
     resources :transfers, only: [:new, :create]
   end
+
   resources :outlines do
     resources :notes
   end

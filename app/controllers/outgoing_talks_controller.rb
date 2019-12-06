@@ -6,14 +6,14 @@ class OutgoingTalksController < ApplicationController
   end
 
   def new
-    @talk = Talk.new
+    @talk = Talk.outgoing.new
     @home = Congregation.home
     @speakers = @home.speakers.includes(:outlines)
     @congregations = Congregation.where(home: [false, nil])
   end
 
   def create
-    @talk = Talk.new(outgoing_talk_params)
+    @talk = Talk.outgoing.new(outgoing_talk_params)
     @home = Congregation.home
     @speakers = @home.speakers.includes(:outlines)
     @congregations = Congregation.where(home: [false, nil])

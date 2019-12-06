@@ -1,6 +1,7 @@
 class CongregationsController < ApplicationController
 
-  before_action :authorize, :dissolve, only: [:index]
+  before_action :authorize
+  before_action :dissolve, only: [:index]
 
   def index
     @congregations = Congregation.includes( speakers: [:talks] ).filter_by(params.slice(:search_for, :status))

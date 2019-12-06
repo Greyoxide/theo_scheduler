@@ -1,0 +1,19 @@
+= errors(@assignment)
+
+section
+  = form_for @assignment do |a|
+    .row
+      .third
+        = a.label :date
+        = a.date_field :date, class: 'required datepicker', id: 'talk_date'
+
+      .third
+        = a.label :kind
+        = a.select :kind, Assignment.kinds.keys.map{ |w| [w.humanize, w] }
+
+      .third
+        = a.label :person_id
+        = a.select :person_id, Person.all.map{ |w| [w.full_name, w.id] }
+
+    .float.bottom
+      = a.submit

@@ -1,6 +1,7 @@
 class TalksController < ApplicationController
 
-  before_action :authorize, :dissolve, only: [:index]
+  before_action :authorize
+  before_action :dissolve, only: [:index]
 
   def index
 
@@ -15,13 +16,15 @@ class TalksController < ApplicationController
       @talks = Talk.where('date >= ?', Date.today).order(:date)
     end
 
+    @assignments = Assignment.find_within(params[:starting], params[:ending])
+
     respond_to do |format|
       format.html
       format.pdf do
-          pdf = TalksPdf.new(@talks, view_context)
-          send_data pdf.render, filename: "Talk_Schedule.pdf",
-                              type: "application/pdf",
-                              disposition: "inline"
+        pdf = TalksPdf.new(@talks, @assignments, view_context)
+        send_data pdf.render, filename: "Talk_Schedule.pdf",
+                            type: "application/pdf",
+                            disposition: "inline"
       end
     end
   end

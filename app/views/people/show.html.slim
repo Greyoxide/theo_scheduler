@@ -1,0 +1,13 @@
+header
+  = back_link
+  h1 = @person.full_name
+
+
+section
+  header
+    h3 Assignments
+    = render 'date_selector'
+  - @assignments.each do |a|
+    li.row
+      .third = a.date.strftime("%D")
+      .third = a.kind.titleize

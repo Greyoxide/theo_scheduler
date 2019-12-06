@@ -1,0 +1,9 @@
+= form_tag({}, {:method => :get}) do
+  h5 Find within date range
+  .row
+    .third
+      = date_field_tag :starting, params[:starting], class: 'datepicker'
+    .third
+      = date_field_tag :ending, params[:ending], class: 'datepicker'
+    .third
+      = submit_tag "Search"

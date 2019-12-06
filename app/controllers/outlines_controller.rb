@@ -7,10 +7,10 @@ class OutlinesController < ApplicationController
 			format.html do
 		    if params[:filter] == 'suspended'
 		      @showing = "Suspended"
-		      @outlines = Outline.suspended
+		      @outlines = Outline.suspended.includes(:speakers)
 		    else
 		      @showing = "Active"
-		      @outlines = Outline.active
+		      @outlines = Outline.active.includes(:speakers)
 		    end
 			end
 			format.js do
@@ -22,6 +22,7 @@ class OutlinesController < ApplicationController
 
 	def show
 		@outline = Outline.find(params[:id])
+		@speakers = @outline.speakers
 	end
 
   def new

@@ -1,5 +1,8 @@
 class TransfersController < ApplicationController
 
+	before_action :authorize
+	before_action :dissolve, only: [:index]
+
 	def new
 		@speaker = Speaker.find(params[:speaker_id])
 		@congregations = Congregation.where.not(id: @speaker.congregation.id)

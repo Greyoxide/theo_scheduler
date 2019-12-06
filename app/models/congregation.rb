@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: congregations
+#
+#  id                :bigint           not null, primary key
+#  coordinator       :string
+#  coordinator_phone :string
+#  home              :boolean
+#  name              :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
 class Congregation < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true

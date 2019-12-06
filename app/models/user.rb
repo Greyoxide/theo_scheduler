@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :bigint           not null, primary key
+#  email                  :string
+#  password_digest        :string
+#  password_reset_sent_at :date
+#  password_reset_token   :string
+#  secure_token           :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#
+
 class User < ApplicationRecord
   has_secure_password validations: false
   validates :password, length: { minimum: 6 }, allow_blank: true

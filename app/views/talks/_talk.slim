@@ -1,6 +1,6 @@
-- if talk.assembly
+- if talk.special?
   li.talk.assembly
-    h4 Circuit Assembly 
+    h4 = talk.kind.titleize
 
 - elsif talk.incoming?
   li.talk.incoming

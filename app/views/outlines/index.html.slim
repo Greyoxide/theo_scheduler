@@ -9,9 +9,11 @@ section
   h3 = "Showing #{@showing} Outlines"
   ul.list
     - @outlines.each do |outline|
-      li
-        span = outline.full_title
-        ul.inline.links
-          li = link_to "Edit", [:edit, outline]
+      / li
+      /   span = outline.full_title
+      /   ul.inline.links
+      /     li = link_to "Edit", [:edit, outline]
 
-      
+      li
+        = link_to outline.full_title, outline
+        span = pluralize(outline.speakers.to_a.count, "Speaker")

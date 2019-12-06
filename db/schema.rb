@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_13_003227) do
+ActiveRecord::Schema.define(version: 2019_12_01_004524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignment_kinds", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.bigint "person_id"
+    t.integer "kind"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["person_id"], name: "index_assignments_on_person_id"
+  end
 
   create_table "congregations", force: :cascade do |t|
     t.string "name"
@@ -46,6 +61,13 @@ ActiveRecord::Schema.define(version: 2019_09_13_003227) do
     t.integer "status", default: 0
   end
 
+  create_table "people", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "speaker_outlines", force: :cascade do |t|
     t.bigint "speaker_id"
     t.bigint "outline_id"
@@ -73,7 +95,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_003227) do
     t.integer "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "assembly"
+    t.integer "kind"
     t.index ["outline_id"], name: "index_talks_on_outline_id"
     t.index ["speaker_id"], name: "index_talks_on_speaker_id"
   end
@@ -88,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_09_13_003227) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "assignments", "people"
   add_foreign_key "speaker_outlines", "outlines"
   add_foreign_key "speaker_outlines", "speakers"
   add_foreign_key "talks", "outlines"

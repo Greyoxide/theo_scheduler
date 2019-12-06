@@ -2,9 +2,10 @@ class TalksPdf < PdfBase
 
   include Rails.application.routes.url_helpers
 
-  def initialize(talks, view)
+  def initialize(talks, assignments, view)
     @talks = talks
     @view = view
+    @assignments = assignments
 
     header
     schedule
@@ -12,16 +13,17 @@ class TalksPdf < PdfBase
 
   def header
     text "Talk Schedule #{@date_range}", size: 20, style: :bold
-    text "Printed: #{Date.today.strftime('%D')}", size: 14
-    move_down 30
+    text "Printed: #{Date.today.strftime('%D')}", size: 12
+    move_down 10
   end
 
   def schedule
     @talks.group_by(&:date).each do |date, talk_group|
+      assignments = @assignments.select{ |a| a.date == date }
       text date.strftime("%b-%e"), size: 11, style: :bold
-      if talk_group.first.assembly
-        move_down 10
-        text "Circuit Assembly", size: 14, style: :bold
+      if talk_group.first.special?
+        move_down 8
+        text talk_group.first.kind.titleize, size: 14, style: :bold
       else
         talk_group.sort_by { |t| t.kind }.group_by(&:kind).each do |kind, talks|
 
@@ -31,16 +33,16 @@ class TalksPdf < PdfBase
           end
 
           talks.sort.each do |talk|
-            move_down 10
+            move_down 8
             if talk.incoming?
-              indent 10 do
+              indent 8 do
                 text talk.outline.title.titleize, style: :bold
                 text "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
                 text "Host group: #{talk.group.full_name}"
               end
 
             else
-              indent 10 do
+              indent 8 do
                 text "#{talk.speaker.full_name} to #{talk.congregation.name.titleize}"
                 indent 10 do
                   text talk.outline.title, style: :italic
@@ -49,11 +51,19 @@ class TalksPdf < PdfBase
             end
           end
         end # end kind, talks
+
+        unless assignments.blank?
+          indent 8 do
+            assignments.each do |as|
+              text "#{as.kind.titleize}: #{as.person.full_name}", style: :italic
+            end
+          end
+        end
       end
 
-      move_down 10
+      move_down 8
       stroke_horizontal_rule
-      move_down 10
+      move_down 8
     end
   end
 

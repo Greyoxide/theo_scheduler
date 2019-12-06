@@ -2,15 +2,7 @@ header
   h1 Talk Schedule
   .row
     .three-qtr
-      = form_tag({}, {:method => :get}) do
-        h5 Search date range
-        .row
-          .third
-            = date_field_tag :starting, params[:starting], class: 'datepicker'
-          .third
-            = date_field_tag :ending, params[:ending], class: 'datepicker'
-          .third
-            = submit_tag "Search"
+      = render 'date_selector'
     .qtr
       section
         ul.links
@@ -19,7 +11,7 @@ header
           li
             = link_to "New Outgoing Talk", [:new, :outgoing_talk]
           li
-            = link_to "New Assembly", [:new, :assembly]
+            = link_to "New Special Event", [:new, :special_event]
           li
             = link_to "Print", talks_path(format: "pdf", starting: params[:starting], ending: params[:ending])
 
@@ -29,7 +21,8 @@ section
     - @talks.group_by(&:date).each do |date, talks|
       h4 = date.strftime("%b-%e")
       ul
-        - talks.group_by { |t| t.kind }.sort.each do |kind, talks|
-          h5 = kind.titleize unless talks.first.assembly
+        - talks.group_by(&:in_out_or_special).sort.each do |kind, talks|
+          - if talks.first.normal?
+            h5 = kind.titleize
           ul
             = render talks

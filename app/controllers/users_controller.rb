@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authorize
+  before_action :dissolve, only: [:index]
 
   def index
     @users = User.all

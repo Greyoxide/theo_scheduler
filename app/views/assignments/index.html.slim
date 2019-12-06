@@ -1,0 +1,16 @@
+headder
+  =back_link
+  h1 Assignments
+  = link_to [:new, :assignment] do
+    button + New Assignment
+  = render 'date_selector'
+
+section
+
+  ul.list
+    - @assignments.each do |as|
+      li.row
+        .qtr = as.date.strftime("%D")
+        .qtr = as.kind.titleize
+        .qtr = as.person.full_name
+        .qtr = link_to "Delete", as, method: "delete"

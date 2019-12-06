@@ -1,5 +1,6 @@
 class IncomingTalksController < ApplicationController
 
+
   before_action :authorize
 
   def index
@@ -7,7 +8,7 @@ class IncomingTalksController < ApplicationController
 
   def new
     @congregations = Congregation.includes(:speakers, [speakers: :outlines])
-    @talk = Talk.new
+    @talk = Talk.incoming.new
     @groups = Group.all
     @selected_group = Group.next_in_rotation
     @next_date = Talk.next_date
@@ -15,7 +16,7 @@ class IncomingTalksController < ApplicationController
 
   def create
     @congregations = Congregation.includes(:speakers, [speakers: :outlines])
-    @talk = Talk.new(incoming_talk_params)
+    @talk = Talk.incoming.new(incoming_talk_params)
     @groups = Group.all
     @selected_group = Group.next_in_rotation
     @next_date = Talk.next_date
