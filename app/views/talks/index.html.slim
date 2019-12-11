@@ -23,6 +23,6 @@ section
       ul
         - talks.group_by(&:in_out_or_special).sort.each do |kind, talks|
           - if talks.first.normal?
-            h5 = kind.titleize
+            h5 = kind
           ul
             = render talks
