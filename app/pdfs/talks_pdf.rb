@@ -37,8 +37,10 @@ class TalksPdf < PdfBase
             if talk.incoming?
               indent 8 do
                 text talk.outline.title.titleize, style: :bold
-                text "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
-                text "Host group: #{talk.group.full_name}"
+                indent 10 do
+                  text "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
+                  text "Host group: #{talk.group.full_name}"
+                end
               end
 
             else
