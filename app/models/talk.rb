@@ -4,7 +4,7 @@
 #
 #  id              :bigint           not null, primary key
 #  date            :date
-#  kind            :integer
+#  kind            :integer          default("normal")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  congregation_id :integer
@@ -42,7 +42,7 @@ class Talk < ApplicationRecord
   end
 
   def one_speaker_cannot_give_two_talks
-    overlap = Talk.where(date: date).where(speaker_id: speaker_id)
+    overlap = Talk.normal.where(date: date).where(speaker_id: speaker_id)
     unless overlap.blank?
       errors.add(:date, "#{self.speaker.full_name} is already schedule for another talk on this day")
     end
