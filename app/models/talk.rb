@@ -97,11 +97,6 @@ class Talk < ApplicationRecord
     end
   end
 
-  def in_or_out
-    'Incoming' if self.incoming?
-    'Outgoing' if self.outgoing?
-  end
-  
   def self.next_date
     talks = self.order(:date)
 

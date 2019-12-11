@@ -25,7 +25,7 @@ class TalksPdf < PdfBase
         move_down 8
         text talk_group.first.kind.titleize, size: 14, style: :bold
       else
-        talk_group.sort_by { |t| t.in_or_out }.group_by(&:in_or_out).each do |kind, talks|
+        talk_group.group_by(&:in_out_or_special).each do |kind, talks|
 
           unless kind == "Incoming"
             move_down 10
