@@ -1,6 +1,7 @@
 - if talk.special?
   li.talk.assembly
     h4 = talk.kind.titleize
+    = link_to "Delete", talk, method: :delete
 
 - elsif talk.incoming?
   li.talk.incoming
