@@ -26,4 +26,8 @@ class Outline < ApplicationRecord
   has_many :notes, as: :notable
 
   default_scope { order(number: :asc) }
+
+  def clean_title
+    Iconv.iconv("US-ASCII//TRANSLIT","UTF-8",title).first
+  end
 end

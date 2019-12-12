@@ -29,12 +29,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'slim'
 gem 'slim-rails'
-
 gem 'backpedal'
-
 gem 'jquery-rails'
-
 gem 'wicked_pdf'
+gem 'iconv'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
