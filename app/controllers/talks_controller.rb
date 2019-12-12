@@ -21,11 +21,10 @@ class TalksController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = TalksPdf.new(@talks, @assignments, view_context)
-        send_data pdf.render, filename: "Talk_Schedule.pdf",
-                            type: "application/pdf",
-                            disposition: "inline"
-      end
+         render pdf: "Talk_Schedule.pdf",
+         template: "talks/schedule",
+         layout: 'pdf'
+       end
     end
   end
 

@@ -1,13 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'assignments/index'
-  get 'assignments/show'
-  get 'assignments/new'
-  get 'assignments/edit'
-  get 'people/index'
-  get 'people/show'
-  get 'people/new'
-  get 'people/edit'
   root to: 'users#index'
 
   resources :users

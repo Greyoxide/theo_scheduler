@@ -55,7 +55,7 @@ class Talk < ApplicationRecord
   end
 
   def cannot_schedule_the_same_incoming_talk_within_one_year
-    t = Talk.normal.where(outline_id: self.outline_id).where("date >= ?", self.date - 1.year).last
+    t = Talk.incoming.normal.where(outline_id: self.outline_id).where("date >= ?", self.date - 1.year).last
     unless t.blank?
       errors.add(:date, "This outline is prevously scheduled #{ t.date.strftime('%D') }(#{ (self.date - t.date).to_i } days before). Please select a different outline or select any date after #{ t.date + 1.year  } ")
     end
@@ -76,7 +76,7 @@ class Talk < ApplicationRecord
   end
 
   def outgoing?
-    self.congregation_id != Congregation.home.id and self.normal?
+    self.normal? and self.congregation_id.present?
   end
 
   def special?

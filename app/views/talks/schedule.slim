@@ -1,0 +1,7 @@
+header
+  h1 = "Talk Schedule #{@date_range}"
+  h2.subheading = "Printed: #{Date.today.strftime('%D')}"
+
+- @talks.group_by(&:date).each do |date, talk_group|
+  - assignments = @assignments.select{ |a| a.date == date }
+  = render 'talks/partials/talk_group', talk_group: talk_group, date: date, assignments: assignments
