@@ -91,7 +91,7 @@ class Talk < ApplicationRecord
     if self.incoming?
       'Incoming'
     elsif self.outgoing?
-      'Outoing'
+      'Outgoing'
     else
       'Special Event'
     end

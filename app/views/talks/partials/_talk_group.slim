@@ -1,14 +1,17 @@
-article
+section
   header
     h3 = date.strftime("%b-%e")
   - if talk_group.first.special?
     h3 = talk_group.first.kind.titleize
   - else
-    ul
+    article
       - talk_group.sort_by{ |r| r.in_out_or_special }.group_by(&:in_out_or_special).each do |kind, talks|
+        - if kind == 'Outgoing'
+          p.subtitle = pluralize(talks.count, 'Outgoing Speaker')
         - talks.each do |talk|
           = render 'talks/partials/incoming_talk', talk: talk if talk.incoming?
           = render 'talks/partials/outgoing_talk', talk: talk if talk.outgoing?
-    ul
-      - assignments.each do |a|
-        li = "#{a.kind.titleize}: #{a.person.full_name}"
+      .grid
+        - assignments.sort_by{|r| r.kind}.each do |a|
+          .item
+            p = "#{a.kind.titleize}: #{a.person.full_name}"

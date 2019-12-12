@@ -1,5 +1,4 @@
-li.outgoing
+.outgoing
   p = "#{talk.speaker.full_name} to #{talk.congregation.name.titleize}"
-  ul
-    li
-      span = talk.outline.clean_title
+  .inner
+    p.subtitle = talk.outline.clean_title

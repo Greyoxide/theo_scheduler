@@ -1,7 +1,5 @@
-li.incoming
+.incoming
   h4 = talk.outline.clean_title.titleize
-  ul
-    li
-      span = "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
-    li
-      span = "Host group: #{talk.group.full_name}"
+  .inner
+    p = "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
+    p = "Host group: #{talk.group.full_name}"
