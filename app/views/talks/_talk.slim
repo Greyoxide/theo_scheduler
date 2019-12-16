@@ -6,7 +6,7 @@
 - elsif talk.incoming?
   li.talk.incoming
     p
-      b = talk.outline.title
+      b = "#{talk.outline.number}-#{talk.outline.title}"
     p = "#{talk.speaker.full_name} from #{talk.speaker.congregation.name.titleize}"
     p = "Hospitality: #{talk.group.name}"
 
@@ -18,5 +18,5 @@
     p
       i = "#{talk.speaker.full_name} to #{talk.congregation.name.titleize}"
     p
-      i = talk.outline.title
+      i = "#{talk.outline.number}-#{talk.outline.title}"
       = link_to "Delete", talk, method: :delete
