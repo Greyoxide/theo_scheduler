@@ -1,0 +1,49 @@
+
+#navigation
+	position: sticky
+	background-color: #007bff
+	display: flex
+	justify-content: space-between
+	padding: .5rem
+	*
+		color: white
+
+	#burger
+		padding: 1rem
+		cursor: pointer
+		z-index: 2
+		.inner
+			@include burger(25px, 3px, 5px, white)
+		&.active
+			.inner
+				@include burger-to-cross(white)
+
+#menu
+	width: 0
+	position: fixed
+	height: 100%
+	top: 0
+	right: 0
+	background-color: white
+	padding-top: 100px
+	margin-top: 83px
+
+	@include phone
+		padding-top: 10px
+
+	z-index: 15
+	transition: .5s
+	overflow: hidden
+
+	&.active
+		width: 100%
+
+	ul
+		padding-top: 50px
+		width: 500px
+		margin: auto
+		list-style: none
+		padding: 0
+		li
+			a
+				font-size: 1.5rem

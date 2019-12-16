@@ -1,12 +1,19 @@
-nav
-  / header
-  /   = link_to root_path do
-  /     h4 Talk Scheduler
-  ul
-    li = link_to "Users", users_path
-    li = link_to "Congregations", congregations_path
-    li = link_to "Groups", groups_path
-    li = link_to "Schedule", talks_path
-    li = link_to "Outlines", outlines_path
-    li = link_to "Assignments", assignments_path
-    li = link_to "People", people_path
+/ nav
+/   / header
+/   /   = link_to root_path do
+/   /     h4 Talk Scheduler
+/   ul
+/     li = link_to "Users", users_path
+/     li = link_to "Congregations", congregations_path
+/     li = link_to "Groups", groups_path
+/     li = link_to "Schedule", talks_path
+/     li = link_to "Outlines", outlines_path
+/     li = link_to "Assignments", assignments_path
+/     li = link_to "People", people_path
+
+
+#navigation
+  h5 = controller_name.titleize
+
+  #burger
+    .inner
