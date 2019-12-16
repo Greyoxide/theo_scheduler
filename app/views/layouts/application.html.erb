@@ -13,8 +13,10 @@
   </head>
 
   <body>
-    <%= render 'navigation' %>
-    <%= render 'menu' %>
+    <%- unless controller_name == 'sessions' %>
+      <%= render 'navigation' %>
+      <%= render 'menu' unless %>
+    <% end %>
     <main>
       <%= yield %>
     </main>
